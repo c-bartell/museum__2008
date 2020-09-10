@@ -122,10 +122,29 @@ class MuseumTest < Minitest::Test
     contestants = dmns.ticket_lottery_contestants(@dead_sea_scrolls)
     actual = dmns.draw_lottery_winner(@dead_sea_scrolls)
 
-    assert contestants.include?(actual)
+    assert contestants.map(&:name).include?(actual)
 
     actual = dmns.draw_lottery_winner(@gems_and_minerals)
 
     assert_nil actual
   end
+
+  # def test_it_can_announce_lottery_winner
+  #   dmns = Museum.new("Denver Museum of Nature and Science")
+  #   dmns.add_exhibit(@gems_and_minerals)
+  #   dmns.add_exhibit(@dead_sea_scrolls)
+  #   dmns.add_exhibit(@imax)
+  #   @patron_1 = Patron.new("Bob", 0)
+  #   @patron_1.add_interest("Dead Sea Scrolls")
+  #   @patron_1.add_interest("Gems and Minerals")
+  #   @patron_2.add_interest("Dead Sea Scrolls")
+  #   @patron_3.add_interest("Dead Sea Scrolls")
+  #   dmns.admit(@patron_1)
+  #   dmns.admit(@patron_2)
+  #   dmns.admit(@patron_3)
+  #
+  #   dmns.stubs(:sample).returns(@patron_1)
+  #
+  #   expected =
+  # end
 end
