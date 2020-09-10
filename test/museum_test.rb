@@ -86,4 +86,23 @@ class MuseumTest < Minitest::Test
 
     assert_equal expected, actual
   end
+
+  def test_it_can_generate_lottery_contestants
+    dmns = Museum.new("Denver Museum of Nature and Science")
+    dmns.add_exhibit(@gems_and_minerals)
+    dmns.add_exhibit(@dead_sea_scrolls)
+    dmns.add_exhibit(@imax)
+    @patron_1 = Patron.new("Bob", 0)
+    @patron_1.add_interest("Dead Sea Scrolls")
+    @patron_1.add_interest("Gems and Minerals")
+    @patron_2.add_interest("Dead Sea Scrolls")
+    @patron_3.add_interest("Dead Sea Scrolls")
+    dmns.admit(@patron_1)
+    dmns.admit(@patron_2)
+    dmns.admit(@patron_3)
+    expected = [@patron_1, @patron_3]
+    actual = dmns.ticket_lottery_contestants(@dead_sea_scrolls)
+
+    assert_equal expected, actual
+  end
 end
