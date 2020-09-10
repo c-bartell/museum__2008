@@ -30,4 +30,23 @@ class MuseumTest < Minitest::Test
 
     assert_equal [@gems_and_minerals, @dead_sea_scrolls, @imax], dmns.exhibits
   end
+
+  def test_can_recommend_exhibits
+    dmns = Museum.new("Denver Museum of Nature and Science")
+    dmns.add_exhibit(@gems_and_minerals)
+    dmns.add_exhibit(@dead_sea_scrolls)
+    dmns.add_exhibit(@imax)
+    @patron_1.add_interest("Dead Sea Scrolls")
+    @patron_1.add_interest("Gems and Minerals")
+    @patron_2.add_interest("IMAX")
+    actual = dmns.recommend_exhibits(@patron_1)
+    expected = [@gems_and_minerals, @dead_sea_scrolls]
+
+    assert_equal expected, actual
+
+    actual = dmns.recommend_exhibits(@patron_2)
+    expected = [@imax]
+
+    assert_equal expected, actual
+  end
 end
