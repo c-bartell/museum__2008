@@ -146,7 +146,7 @@ class MuseumTest < Minitest::Test
 
     dmns.stubs(:sample).returns(@patron_1)
 
-    expected = "Bob has won the IMAX edhibit lottery"
+    expected = "Bob has won the IMAX exhibit lottery"
     actual = dmns.dmns.announce_lottery_winner(imax)
     assert_equal expected, actual
   end
