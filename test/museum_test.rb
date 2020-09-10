@@ -129,22 +129,25 @@ class MuseumTest < Minitest::Test
     assert_nil actual
   end
 
-  # def test_it_can_announce_lottery_winner
-  #   dmns = Museum.new("Denver Museum of Nature and Science")
-  #   dmns.add_exhibit(@gems_and_minerals)
-  #   dmns.add_exhibit(@dead_sea_scrolls)
-  #   dmns.add_exhibit(@imax)
-  #   @patron_1 = Patron.new("Bob", 0)
-  #   @patron_1.add_interest("Dead Sea Scrolls")
-  #   @patron_1.add_interest("Gems and Minerals")
-  #   @patron_2.add_interest("Dead Sea Scrolls")
-  #   @patron_3.add_interest("Dead Sea Scrolls")
-  #   dmns.admit(@patron_1)
-  #   dmns.admit(@patron_2)
-  #   dmns.admit(@patron_3)
-  #
-  #   dmns.stubs(:sample).returns(@patron_1)
-  #
-  #   expected =
-  # end
+  def test_it_can_announce_lottery_winner
+    dmns = Museum.new("Denver Museum of Nature and Science")
+    dmns.add_exhibit(@gems_and_minerals)
+    dmns.add_exhibit(@dead_sea_scrolls)
+    dmns.add_exhibit(@imax)
+    @patron_1 = Patron.new("Bob", 0)
+    @patron_1.add_interest("Dead Sea Scrolls")
+    @patron_1.add_interest("Gems and Minerals")
+    @patron_2.add_interest("Dead Sea Scrolls")
+    @patron_3.add_interest("Dead Sea Scrolls")
+
+    dmns.admit(@patron_1)
+    dmns.admit(@patron_2)
+    dmns.admit(@patron_3)
+
+    dmns.stubs(:sample).returns(@patron_1)
+
+    expected = "Bob has won the IMAX edhibit lottery"
+    actual = dmns.dmns.announce_lottery_winner(imax)
+    assert_equal expected, actual
+  end
 end
